@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Orthopaedic Consultation in Bengaluru | OrthoNow</title>
+<meta name="description" content="Persistent knee or back pain affecting your work. See an orthopaedic specialist at OrthoNow. Book a consultation in two minutes.">
+<style>
+  /* ============================================
+     DESIGN TOKENS
+     Clinical, specific palette. Not cream/serif,
+     not near black with neon, not newspaper rules.
+     ============================================ */
+  :root {
+    --color-bg: #EEF2F1;
+    --color-surface: #FFFFFF;
+    --color-ink: #15231F;
+    --color-ink-soft: #44544F;
+    --color-primary: #0B5E54;
+    --color-primary-dark: #073F38;
+    --color-primary-soft: #E1EEEB;
+    --color-trust: #2D6A4F;
+    --color-border: #D7DEDB;
+    --color-error: #B3261E;
+    --color-error-bg: #FBE9E7;
+
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 20px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+
+    --radius-md: 12px;
+    --radius-lg: 20px;
+
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* ============================================
+     RESET AND BASE
+     ============================================ */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-stack);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    line-height: 1.5;
+    padding-bottom: 84px; /* reserves space for sticky mobile CTA */
+  }
+
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  /* Visible keyboard focus state, required for accessibility */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 3px solid var(--color-primary-dark);
+    outline-offset: 2px;
+  }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .logo {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-primary-dark);
+  }
+
+  .header-phone {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    padding: var(--space-xl) var(--space-md) var(--space-lg);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-trust);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Pain selector: the signature interactive element of the page.
+     Lets the visitor self-identify their pain, and the headline and
+     subheadline rewrite to match, making the page feel built for
+     them specifically rather than a static, generic template. */
+  .pain-toggle {
+    display: inline-flex;
+    background-color: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: 999px;
+    padding: 4px;
+    margin-bottom: var(--space-md);
+  }
+
+  .pain-toggle-btn {
+    border: none;
+    background: transparent;
+    color: var(--color-ink-soft);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .pain-toggle-btn.active {
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+    line-height: 1.18;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    transition: opacity 0.15s ease;
+  }
+
+  .hero p {
+    margin-top: var(--space-sm);
+    font-size: 16px;
+    color: var(--color-ink-soft);
+    max-width: 46ch;
+    transition: opacity 0.15s ease;
+  }
+
+  /* Trust element: placed directly under the subheadline,
+     immediately before the form, so it supports the decision
+     to fill the form rather than acting as decoration. */
+  .trust-strip {
+    margin-top: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--color-primary-soft);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+  }
+
+  .trust-strip svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+
+  .trust-strip p {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+
+  /* ============================================
+     FORM CARD
+     ============================================ */
+  .form-section {
+    padding: 0 var(--space-md) var(--space-xl);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .form-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .form-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+  }
+
+  .field-group {
+    margin-bottom: var(--space-md);
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="tel"] {
+    width: 100%;
+    font-size: 16px; /* prevents iOS zoom on focus */
+    padding: 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  input[type="text"]:focus,
+  input[type="tel"]:focus {
+    border-color: var(--color-primary);
+  }
+
+  input.field-invalid {
+    border-color: var(--color-error);
+  }
+
+  .field-hint {
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--color-ink-soft);
+  }
+
+  .error-text {
+    display: none;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--color-error);
+    font-weight: 600;
+  }
+
+  .error-text.visible {
+    display: block;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: var(--space-xs);
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  .submit-btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .form-footnote {
+    margin-top: var(--space-sm);
+    font-size: 12px;
+    color: var(--color-ink-soft);
+    text-align: center;
+  }
+
+  /* ============================================
+     THANK YOU STATE
+     Replaces the form in place, no page reload.
+     ============================================ */
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: var(--space-sm) 0;
+  }
+
+  .thank-you.visible {
+    display: block;
+  }
+
+  .thank-you svg {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-sm);
+  }
+
+  .thank-you h2 {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+
+  .thank-you p {
+    font-size: 14.5px;
+    color: var(--color-ink-soft);
+  }
+
+  /* ============================================
+     STICKY MOBILE CTA
+     ============================================ */
+  .sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 12px var(--space-md);
+    z-index: 10;
+  }
+
+  .sticky-cta a {
+    display: block;
+    text-align: center;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Hide the sticky bar once wider than mobile, the inline
+     form button is already visible without scrolling. */
+  @media (min-width: 720px) {
+    .sticky-cta {
+      display: none;
+    }
+    body {
+      padding-bottom: 0;
+    }
+    .hero h1 {
+      font-size: 38px;
+    }
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .site-footer {
+    padding: var(--space-md);
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-ink-soft);
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <span class="logo">OrthoNow</span>
+    <a class="header-phone" href="tel:+917654736587">Call a clinic</a> <!-- I have written my phone number for now -->
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Tell us what is bothering you</p>
+      <div class="pain-toggle" role="group" aria-label="Select your main concern">
+        <button type="button" class="pain-toggle-btn active" data-pain="knee" aria-pressed="true">Knee pain</button>
+        <button type="button" class="pain-toggle-btn" data-pain="back" aria-pressed="false">Back pain</button>
+      </div>
+
+      <h1 id="heroHeadline" aria-live="polite">Knee pain making it hard to get through your workday.</h1>
+      <p id="heroSubhead">See an orthopaedic specialist this week, get a clear diagnosis, and find out exactly what is causing the knee pain before it gets worse.</p>
+
+      <div class="trust-strip">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="11" stroke="#0B5E54" stroke-width="2"/>
+          <path d="M7 12.5L10.2 15.7L17 8.5" stroke="#0B5E54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p>Orthopaedic specialists only, across 9 clinics in Bengaluru, Hyderabad and Chennai.</p>
+      </div>
+    </section>
+
+    <section class="form-section" id="booking-form">
+      <div class="form-card">
+
+        <form id="consultationForm" novalidate>
+          <h2>Book your consultation</h2>
+
+          <div class="field-group">
+            <label for="nameInput">Full name</label>
+            <input type="text" id="nameInput" name="name" autocomplete="name" aria-describedby="nameError">
+            <p class="error-text" id="nameError" aria-live="polite">Enter your full name to continue.</p>
+          </div>
+
+          <div class="field-group">
+            <label for="phoneInput">Phone number</label>
+            <input type="tel" id="phoneInput" name="phone" autocomplete="tel" inputmode="numeric" placeholder="10-digit mobile number" aria-describedby="phoneError phoneHint">
+            <p class="error-text" id="phoneError" aria-live="polite">Enter a valid 10-digit mobile number.</p>
+            <p class="field-hint" id="phoneHint">0 of 10 digits entered.</p>
+          </div>
+
+          <button type="submit" class="submit-btn">Book Free Consultation</button>
+          <p class="form-footnote">A clinic coordinator will call you back to confirm a time.</p>
+        </form>
+
+        <div class="thank-you" id="thankYouState">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="11" stroke="#2D6A4F" stroke-width="2"/>
+            <path d="M7 12.5L10.2 15.7L17 8.5" stroke="#2D6A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h2>Request received.</h2>
+          <p>A clinic coordinator will call you within the next few hours to confirm your appointment time and nearest clinic.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta">
+    <a href="#booking-form">Book Free Consultation</a>
+  </div>
+
+  <footer class="site-footer">
+    <p>OrthoNow. 9 clinics across Bengaluru, Hyderabad and Chennai.</p>
+  </footer>
+
+  <script>
+    // Cache references once, reused across the validation and submit logic.
+    var form = document.getElementById('consultationForm');
+    var nameInput = document.getElementById('nameInput');
+    var phoneInput = document.getElementById('phoneInput');
+    var nameError = document.getElementById('nameError');
+    var phoneError = document.getElementById('phoneError');
+    var phoneHint = document.getElementById('phoneHint');
+    var thankYouState = document.getElementById('thankYouState');
+    var submitBtn = form.querySelector('.submit-btn');
+    var painToggleBtns = document.querySelectorAll('.pain-toggle-btn');
+    var heroHeadline = document.getElementById('heroHeadline');
+    var heroSubhead = document.getElementById('heroSubhead');
+
+    // Headline and subheadline copy keyed by the pain type the visitor
+    // selects. This is the page's signature interactive element, it
+    // personalizes the hero to the visitor instead of using one static
+    // headline for both knee and back pain audiences.
+    var painCopy = {
+      knee: {
+        headline: 'Knee pain making it hard to get through your workday.',
+        subhead: 'See an orthopaedic specialist this week, get a clear diagnosis, and find out exactly what is causing the knee pain before it gets worse.'
+      },
+      back: {
+        headline: 'Back pain making it hard to sit through a full workday.',
+        subhead: 'See an orthopaedic specialist this week, get a clear diagnosis, and find out exactly what is causing the back pain before it gets worse.'
+      }
+    };
+
+    // Swap the active toggle state and crossfade the headline and
+    // subheadline into the copy for the selected pain type.
+    painToggleBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn.classList.contains('active')) {
+          return;
+        }
+        painToggleBtns.forEach(function (b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        var pain = btn.getAttribute('data-pain');
+        heroHeadline.style.opacity = '0';
+        heroSubhead.style.opacity = '0';
+        setTimeout(function () {
+          heroHeadline.textContent = painCopy[pain].headline;
+          heroSubhead.textContent = painCopy[pain].subhead;
+          heroHeadline.style.opacity = '1';
+          heroSubhead.style.opacity = '1';
+        }, 150);
+      });
+    });
+
+    // Validates that the phone field contains exactly 10 digits, ignoring
+    // any spacing or punctuation the user may have typed.
+    function isValidPhone(value) {
+      var digitsOnly = value.replace(/\D/g, '');
+      // Indian mobile numbers are 10 digits and always start with 6, 7, 8, or 9.
+      return /^[6-9]\d{9}$/.test(digitsOnly);
+    }
+
+    // Live digit counter, updates on every keystroke so the visitor can
+    // see progress toward a valid number on a small mobile keypad.
+    phoneInput.addEventListener('input', function () {
+      var digitsOnly = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+      phoneHint.textContent = digitsOnly.length + ' of 10 digits entered.';
+      if (isValidPhone(phoneInput.value)) {
+        phoneInput.classList.remove('field-invalid');
+        phoneError.classList.remove('visible');
+      }
+    });
+
+    // Clears the name error the moment the field becomes valid again,
+    // rather than waiting for the next submit attempt.
+    nameInput.addEventListener('input', function () {
+      if (nameInput.value.trim().length > 1) {
+        nameInput.classList.remove('field-invalid');
+        nameError.classList.remove('visible');
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      // Always prevent the default submission first. This is a client-side
+      // demo form with no backend endpoint, and the page must never reload.
+      event.preventDefault();
+
+      var nameValue = nameInput.value.trim();
+      var phoneValue = phoneInput.value.trim();
+      var isNameValid = nameValue.length > 1;
+      var isPhoneValid = isValidPhone(phoneValue);
+
+      // Toggle inline error states instead of a native browser alert.
+      nameInput.classList.toggle('field-invalid', !isNameValid);
+      nameError.classList.toggle('visible', !isNameValid);
+      phoneInput.classList.toggle('field-invalid', !isPhoneValid);
+      phoneError.classList.toggle('visible', !isPhoneValid);
+
+      if (!isNameValid || !isPhoneValid) {
+        return; // stop here, do not push to dataLayer on an invalid submit
+      }
+
+      // Read the currently active pain toggle at submit time so the
+      // dataLayer event captures which audience segment this lead belongs to.
+      var activePainBtn = document.querySelector('.pain-toggle-btn.active');
+      var painType = activePainBtn ? activePainBtn.getAttribute('data-pain') : 'unknown';
+
+      // Validation passed. Fire the GTM dataLayer push immediately, at the
+      // actual moment of a valid submission, so GTM can pick this up with
+      // a Custom Event trigger and forward it to GA4 and Google Ads.
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'consultation_form_submitted',
+        clinic_city: 'Bengaluru',
+        lead_source: 'Google Ads - Consultation Landing Page',
+        pain_type: painType
+      });
+
+      // Log the full dataLayer array to the console so the push is
+      // immediately visible during a live demo without manual inspection.
+      console.log('dataLayer push fired:', window.dataLayer);
+
+      // Briefly disable the button with a processing label, then reveal
+      // the thank-you state. This is a real UI state change, not a static
+      // swap, and reflects that a request is genuinely being handled.
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Booking your slot...';
+
+      setTimeout(function () {
+        form.style.display = 'none';
+        thankYouState.classList.add('visible');
+      }, 500);
+    });
+  </script>
+
+</body>
+</html>
